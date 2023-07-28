@@ -1,0 +1,15 @@
+{
+    "name": "pwa-fehou",
+    "version": "0.1",
+    "author": "RodrigoDornelles",
+    "license": "AGPL-3.0-or-later",
+    "homepage": "https://rodrigodornelles.github.io/pwa-fehou",
+    "repository": "github:rodrigodornelles/3bc-lang",
+    "funding": "https://github.com/sponsors/RodrigoDornelles",
+    "bugs": "https://github.com/RodrigoDornelles/pwa-fehou/issues",
+    "keywords": [],
+    "description": "an web app that's a font editor utility tool for homebrew games.",
+    "devDependencies": {
+        "typescript": "^5.1.6"
+    }
+}
