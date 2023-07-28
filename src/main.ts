@@ -1,3 +1,5 @@
+import { chr_to_canvas } from './chr_to_canvas'
+
 document.addEventListener('DOMContentLoaded', () => {
     const fileInput: HTMLInputElement = document.querySelector('#input-rom') as HTMLInputElement;
   
@@ -17,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (fileContentDiv) {
               fileContentDiv.innerHTML = base64Content;
             }
+            console.log(chr_to_canvas)
           }
         };
   
