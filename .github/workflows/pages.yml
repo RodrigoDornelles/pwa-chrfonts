@@ -1,6 +1,6 @@
 name: Pages
 
-on: 
+on:
   push:
   workflow_dispatch:
 
@@ -14,9 +14,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  pwa:
-      runs-on: ubuntu-latest
-      steps:
+  build:
+    runs-on: ubuntu-latest
+    steps:
       -
         name: Checkout
         uses: actions/checkout@v3
@@ -38,10 +38,20 @@ jobs:
       -
         name: Upload artifact
         uses: actions/upload-pages-artifact@v2
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch' }}
+    steps:
+      - 
+        name: Checkout
+        uses: actions/checkout@v3
+      - 
+        name: Download artifact
+        uses: actions/download-pages-artifact@v2
         with:
           path: 'dist'
-      -
-        id: deployment
-        if: ${{ github.ref == 'refs/heads/main' }}
+      - 
         name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
