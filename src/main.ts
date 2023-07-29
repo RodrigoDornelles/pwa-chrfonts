@@ -11,7 +11,5 @@ document.addEventListener('DOMContentLoaded', () => {
       const contentImg = await canvasFromChr(contentBin)
       const canvasCtx = canvasOutput.getContext('2d')
       canvasCtx?.drawImage(contentImg, 0, 0)
-
-      console.log(btoa(contentBin))
     });
 });

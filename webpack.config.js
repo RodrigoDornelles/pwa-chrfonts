@@ -7,7 +7,7 @@ module.exports = {
     style: './public/style.css'
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {

@@ -1,4 +1,6 @@
 export async function canvasFromChr(fileContent: string): Promise<HTMLCanvasElement> {
+    const COLORS = [0x0f, 0x30, 0x24, 0x2c]
+  
     // Define the constant palette with a magic number
     const NES_PALLETE :string =
         "808080" + "003DA6" + "0012B0" + "440096" + "A1005E" +
@@ -32,26 +34,28 @@ export async function canvasFromChr(fileContent: string): Promise<HTMLCanvasElem
   
     // Assuming each sprite is 8x8 pixels
     const spriteSize = 8
+    const colorDepth = 2
   
     // Draw the sprites on the canvas based on the file content and palette
     for (let spriteId = 0; spriteId < 512; spriteId++) {
-      const row = Math.floor(spriteId / 32)
-      const col = spriteId % 32
+      const row = Math.floor(spriteId / 16)
+      const col = spriteId % 16
   
       for (let pixelX = 0; pixelX < spriteSize; pixelX++) {
         for (let pixelY = 0; pixelY < spriteSize; pixelY++) {
           // Get the index of the pixel in the sprite data
-          const pixelIndex = spriteId * spriteSize * spriteSize + pixelY * spriteSize + pixelX
-  
+          const pixelIndex = spriteId * (spriteSize*colorDepth)
+          
           // @todo wrong algoritimo generate by chat gpt
-          const pixelColor = fileContent.slice(pixelIndex * 2, pixelIndex * 2 + 2)
-  
-          // Find the corresponding color from the palette
-          const colorIndex = parseInt(pixelColor, 16) % colors.length
-          const colorValue = colors[colorIndex]
+          const color1 = fileContent.slice(pixelIndex, pixelIndex + 8)
+          const color2 = fileContent.slice(pixelIndex + 8, pixelIndex + 16)
+
+          const pixelColor = ((color1.charCodeAt(pixelY) >> (7 - pixelX)) & 1) | (((color2.charCodeAt(pixelY) >> (7 - pixelX)) & 1) << 1)
+          const indexColor = COLORS[pixelColor]
+          const valueColor = colors[indexColor]
   
           // Draw the pixel on the canvas
-          ctx.fillStyle = `#${colorValue}`
+          ctx.fillStyle = `#${valueColor}`
           ctx.fillRect(col * spriteSize + pixelX, row * spriteSize + pixelY, 1, 1)
         }
       }
@@ -60,4 +64,3 @@ export async function canvasFromChr(fileContent: string): Promise<HTMLCanvasElem
     // Return the canvas with the rendered sprites
     return canvas
 }
-  
