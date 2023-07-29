@@ -9,6 +9,14 @@
         <aside>
             <label>Import Tileset or Rom</label>
             <input type="file" id="input-rom" accept=".nes,.chr">
+            <label>Color preview</label>
+            <select id="opt-pal-defaults">
+                <option disabled>Select pre-made palette...</option>
+                <option value="0f30242c" selected>CGA Graphics</option>
+                <option value="0f302716">Kokobatoru 2</option>
+                <option value="22162718">Mario Bros (mario)</option>
+                <option value="22291a0f">Mario Bros (world)</option>
+            </select>
             <pre id="output-debug">debug out here</pre>
         </aside>
     </body>

@@ -1,15 +1,19 @@
 import { readFile } from './readFile'
-import { canvasFromChr } from './canvasFromChr'
+import { canvasFromChr } from './nes'
 
 document.addEventListener('DOMContentLoaded', () => {
     const fileInput: HTMLInputElement = document.querySelector('#input-rom') as HTMLInputElement
     const canvasOutput: HTMLCanvasElement = document.querySelector('#output-ppu') as HTMLCanvasElement
+    const paleteSelect: HTMLSelectElement = document.querySelector("#opt-pal-defaults") as HTMLSelectElement
 
-    fileInput.addEventListener('change', async function () {
+    async function draw() {
       const filelist: FileList = fileInput.files as FileList
       const contentBin = await readFile(filelist[0])
-      const contentImg = await canvasFromChr(contentBin)
+      const contentImg = await canvasFromChr(contentBin, paleteSelect.value)
       const canvasCtx = canvasOutput.getContext('2d')
       canvasCtx?.drawImage(contentImg, 0, 0)
-    });
+    }
+
+    fileInput.addEventListener('change', draw);
+    paleteSelect.addEventListener('change', draw);
 });

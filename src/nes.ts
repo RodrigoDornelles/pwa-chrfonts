@@ -1,6 +1,4 @@
-export async function canvasFromChr(fileContent: string): Promise<HTMLCanvasElement> {
-    const COLORS = [0x0f, 0x30, 0x24, 0x2c]
-  
+export async function canvasFromChr(fileContent: string, paletteText: string): Promise<HTMLCanvasElement> {
     // Define the constant palette with a magic number
     const NES_PALLETE :string =
         "808080" + "003DA6" + "0012B0" + "440096" + "A1005E" +
@@ -31,6 +29,10 @@ export async function canvasFromChr(fileContent: string): Promise<HTMLCanvasElem
       const colorValue: string = NES_PALLETE.slice(i, i + 6)
       colors.push(colorValue)
     }
+    const palette: number[] = []
+    for (let i = 0; i < paletteText.length; i += 2) {
+      palette.push(parseInt(paletteText.slice(i, i + 2), 16))
+    }
   
     // Assuming each sprite is 8x8 pixels
     const spriteSize = 8
@@ -51,7 +53,7 @@ export async function canvasFromChr(fileContent: string): Promise<HTMLCanvasElem
           const color2 = fileContent.slice(pixelIndex + 8, pixelIndex + 16)
 
           const pixelColor = ((color1.charCodeAt(pixelY) >> (7 - pixelX)) & 1) | (((color2.charCodeAt(pixelY) >> (7 - pixelX)) & 1) << 1)
-          const indexColor = COLORS[pixelColor]
+          const indexColor = palette[pixelColor]
           const valueColor = colors[indexColor]
   
           // Draw the pixel on the canvas
