@@ -66,3 +66,25 @@ export async function canvasFromChr(fileContent: string, paletteText: string): P
     // Return the canvas with the rendered sprites
     return canvas
 }
+
+export function isRom(fileContent: string): Boolean
+{
+  return fileContent.slice(0, 4) == "NES\x1a"
+}
+
+export function chrFromRom(fileContent: string): string
+{
+  // https://www.nesdev.org/wiki/INES
+  function hasTraine(fileContent: string): Boolean {
+    return !!(fileContent.charCodeAt(6) & 4)
+  }
+
+  const header = 16
+  const chr = 8192 * fileContent.charCodeAt(5)
+  const rom = 16384 * fileContent.charCodeAt(4)
+  const traine = hasTraine(fileContent)? 512: 0
+  const begin = header + traine + rom
+  const end = begin + chr
+
+  return fileContent.slice(begin, end)
+}

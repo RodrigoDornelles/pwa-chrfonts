@@ -1,5 +1,5 @@
 import { readFile } from './readFile'
-import { canvasFromChr } from './nes'
+import { canvasFromChr, isRom, chrFromRom } from './nes'
 
 document.addEventListener('DOMContentLoaded', () => {
     const fileInput: HTMLInputElement = document.querySelector('#input-rom') as HTMLInputElement
@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     async function draw() {
       const filelist: FileList = fileInput.files as FileList
       const contentBin = await readFile(filelist[0])
-      const contentImg = await canvasFromChr(contentBin, paleteSelect.value)
+      const contentChr = isRom(contentBin)? chrFromRom(contentBin): contentBin
+      const contentImg = await canvasFromChr(contentChr, paleteSelect.value)
       const canvasCtx = canvasOutput.getContext('2d')
       canvasCtx?.drawImage(contentImg, 0, 0)
     }
