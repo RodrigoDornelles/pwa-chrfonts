@@ -7,7 +7,7 @@ module.exports = {
     style: './public/style.css'
   },
   output: {
-    filename: '[name].[contenthash].js',
+    filename: '[name].js?[contenthash]',
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
