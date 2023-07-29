@@ -1,4 +1,4 @@
-export async function canvasFromChr(fileContent: string, paletteText: string): Promise<HTMLCanvasElement> {
+export async function canvasFromChr(fileContent: string, paletteText: string, width: number, height: number): Promise<HTMLCanvasElement> {
     // Define the constant palette with a magic number
     const NES_PALLETE :string =
         "808080" + "003DA6" + "0012B0" + "440096" + "A1005E" +
@@ -18,6 +18,8 @@ export async function canvasFromChr(fileContent: string, paletteText: string): P
     // Create an off-screen canvas
     const canvas: HTMLCanvasElement = document.createElement('canvas')
     const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d')
+    canvas.width = width
+    canvas.height = height
   
     if (!ctx) {
       throw new Error('Canvas context is not supported.')
@@ -37,12 +39,14 @@ export async function canvasFromChr(fileContent: string, paletteText: string): P
     // Assuming each sprite is 8x8 pixels
     const spriteSize = 8
     const colorDepth = 2
+    const spriteColumns = Math.floor(width/spriteSize)
+    const lastSprite = Math.floor(fileContent.length/16)
   
     // Draw the sprites on the canvas based on the file content and palette
-    for (let spriteId = 0; spriteId < 512; spriteId++) {
-      const row = Math.floor(spriteId / 16)
-      const col = spriteId % 16
-  
+    for (let spriteId = 0; spriteId < lastSprite; spriteId++) {
+      const row = Math.floor(spriteId / spriteColumns)
+      const col = spriteId % spriteColumns
+
       for (let pixelX = 0; pixelX < spriteSize; pixelX++) {
         for (let pixelY = 0; pixelY < spriteSize; pixelY++) {
           // Get the index of the pixel in the sprite data
