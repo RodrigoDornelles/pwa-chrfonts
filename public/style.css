@@ -19,6 +19,7 @@ body {
 
 main {
     width: 100%;
+    max-height: 100vh;
     display: flex;
     padding: 20px;
 }
