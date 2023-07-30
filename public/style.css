@@ -31,3 +31,18 @@ canvas {
     image-rendering: pixelated;
     image-rendering: crisp-edges;
 }
+
+input, select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #fff;
+  outline: none;
+  width: 100%;
+}
+
+select {
+  background-size: 12px;
+  padding-right: 30px;
+}
