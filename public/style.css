@@ -1,10 +1,18 @@
-html, body {
+* {
     margin: 0;
+}
+
+body {
     padding: 0;
+}
+
+hr {
+    width: 80%;
 }
 
 body {
     width: 100vw;
+    min-height: 100vh;
     display: flex;
     background-color: gray;
 }
@@ -39,10 +47,19 @@ input, select {
   font-size: 16px;
   background-color: #fff;
   outline: none;
-  width: 100%;
+  width: 90%;
 }
 
 select {
   background-size: 12px;
   padding-right: 30px;
+}
+
+@media only screen and (max-width: 720px) {
+    body {
+        display: block;
+    }
+    aside {
+        width: 100%
+    }
 }
