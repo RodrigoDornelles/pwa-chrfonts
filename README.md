@@ -3,8 +3,13 @@
 [![sponsors](https://img.shields.io/github/sponsors/rodrigodornelles?color=ff69b4&logo=github)](https://github.com/sponsors/RodrigoDornelles)
 [![Pages](https://github.com/RodrigoDornelles/pwa-fehou/actions/workflows/pages.yml/badge.svg)](https://github.com/RodrigoDornelles/pwa-fehou/actions/workflows/pages.yml)
 
-> an web app that's a font editor utility tool for homebrew games.
+> **run at in your browser!** that's a editor utility to change your fonts sprites in tilesets and homebrews/rackrom games.
 
+| 1- choose the rom file<br/><br/>2- configure preview<br/><br/>3- choose a text font<br/><br/>4- customize position<br/><br/>5- add effects</br><br/>6- export rom/tileset| ![demo](https://raw.githubusercontent.com/RodrigoDornelles/RodrigoDornelles/master/media/pwa-chr-01-min.gif) |
+| :-- | :-: |
+
+* **NOTE** the editor is still in progress, so it is only possible to preview.
+ 
 ## Features
 
  * [X] Preview tileset online in your browser
