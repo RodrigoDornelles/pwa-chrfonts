@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>CHR FONTS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <main>
+            <canvas id="output-ppu" width="128" height="128"></canvas>
+        </main>
+        <aside>
+            <h1>CHR FONTS</h1>
+            <hr/>
+            <label>Import Tileset or Rom</label>
+            <input type="file" id="input-rom" accept=".nes,.chr">
+            <label>Bank select</label>
+            <select id="opt-bank-chr">
+            </select>
+            <label>Color preview</label>
+            <select id="opt-pal-defaults">
+                <option disabled>Select pre-made palette...</option>
+                <option value="0f30242c" selected>CGA Graphics</option>
+                <option value="0f302716">Kokobatoru 2</option>
+                <option value="22162718">Mario Bros (mario)</option>
+                <option value="22291a0f">Mario Bros (world)</option>
+            </select>
+            <br/>
+            <label>Grid preview</label>
+            <select id="opt-grid-resolution">
+                <option value="128x128" selected>128x128</option>
+                <option value="256x128">256x128</option>
+                <option value="128x256">128x256</option>
+                <option value="512x64">512x64</option>
+            </select>
+        </aside>
+    </body>
+</html>

@@ -1,6 +1,6 @@
 name: Pages
 
-on: 
+on:
   push:
   workflow_dispatch:
 
@@ -14,9 +14,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  pwa:
-      runs-on: ubuntu-latest
-      steps:
+  build:
+    runs-on: ubuntu-latest
+    steps:
       -
         name: Checkout
         uses: actions/checkout@v3
@@ -31,16 +31,35 @@ jobs:
         run: npm install
       -
         name: Build project
-        run: ./node_modules/.bin/tsc
+        run: npm run build
       -
         name: Setup Pages
         uses: actions/configure-pages@v3
       -
-        name: Upload artifact
+        name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: website
+          path: ./dist/
+          if-no-files-found: error
+          retention-days: 1
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch' }}
+    steps:
+      - 
+        name: Checkout artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: website
+          path: ./dist/
+      - 
+        name: Upload to Github Pages
         uses: actions/upload-pages-artifact@v2
         with:
-          path: 'dist'
-      -
-        id: deployment
-        name: Deploy to GitHub Pages
+          path: ./dist/
+      - 
+        name: Publish
         uses: actions/deploy-pages@v2

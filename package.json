@@ -4,12 +4,23 @@
     "author": "RodrigoDornelles",
     "license": "AGPL-3.0-or-later",
     "homepage": "https://rodrigodornelles.github.io/pwa-fehou",
-    "repository": "github:rodrigodornelles/3bc-lang",
+    "repository": "github:rodrigodornelles/pwa-fehou",
     "funding": "https://github.com/sponsors/RodrigoDornelles",
     "bugs": "https://github.com/RodrigoDornelles/pwa-fehou/issues",
     "keywords": [],
     "description": "an web app that's a font editor utility tool for homebrew games.",
+    "scripts": {
+        "start": "webpack --watch",
+        "build": "webpack"
+    },
     "devDependencies": {
-        "typescript": "^5.1.6"
+        "css-loader": "^6.8.1",
+        "html-loader": "^4.2.0",
+        "html-webpack-plugin": "^5.5.3",
+        "style-loader": "^3.3.3",
+        "ts-loader": "^9.4.4",
+        "typescript": "^5.1.6",
+        "webpack": "^5.88.2",
+        "webpack-cli": "^5.1.4"
     }
 }
