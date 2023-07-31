@@ -78,7 +78,7 @@ export function isRom(fileContent: string): Boolean
 
 export function getBanks(fileContent: string): number
 {
-  return fileContent.charCodeAt(4)
+  return fileContent.charCodeAt(5)
 }
 
 export function chrFromRom(fileContent: string, bank: number): string
