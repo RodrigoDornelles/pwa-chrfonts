@@ -6,17 +6,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvasOutput: HTMLCanvasElement = document.querySelector('#output-ppu') as HTMLCanvasElement
     const paleteSelect: HTMLSelectElement = document.querySelector("#opt-pal-defaults") as HTMLSelectElement
     const sizeSelect: HTMLSelectElement = document.querySelector("#opt-grid-resolution") as HTMLSelectElement
-    const bankSelect: HTMLInputElement = document.querySelector("#opt-bank-chr") as HTMLInputElement
+    const bankSelect: HTMLSelectElement = document.querySelector("#opt-bank-chr") as HTMLSelectElement
+    let contentBin: string;
+    let contentChr: string;
+
+    function bank(b: number) {
+      const banksArr = Array.from({length: b}, (_, i) => i + 1).map(i => `bank ${i}`)
+      Array.from(bankSelect.children).forEach(child => {
+        bankSelect.removeChild(child);
+      })
+      banksArr.forEach((t, i) => {
+        const el = document.createElement("option") as HTMLOptionElement
+        [el.value, el.text] = [`${i}`, t]
+        bankSelect.appendChild(el)
+      });
+      bankSelect.value = "0"
+    }
+
+    async function read() {
+      const filelist: FileList = fileInput.files as FileList
+      contentBin = await readFile(filelist[0])
+      contentChr = isRom(contentBin)?
+        chrFromRom(contentBin, parseInt(bankSelect.value)):
+        contentBin
+    }
 
     async function draw() {
-      const filelist: FileList = fileInput.files as FileList
-      const contentBin = await readFile(filelist[0])
-      let contentChr: string = contentBin
-
-      if (isRom(contentBin)) {
-        contentChr = chrFromRom(contentBin, parseInt(bankSelect.value))
-        bankSelect.max = `${getBanks(contentBin)}`
-      }
       const contentImg = await canvasFromChr(
         contentChr,
         paleteSelect.value,
@@ -27,15 +42,23 @@ document.addEventListener('DOMContentLoaded', () => {
       canvasCtx?.drawImage(contentImg, 0, 0)
     }
 
-    paleteSelect.addEventListener('change', draw)
-    bankSelect.addEventListener('change', draw)
+    paleteSelect.addEventListener('change', async () => {
+      await read()
+      await draw()
+    })
+    bankSelect.addEventListener('change', async () => {
+      await read()
+      await draw()
+    })
     fileInput.addEventListener('change', async () => {
-      bankSelect.max = "1"
-      bankSelect.value = "1"
+      await read()
+      bank(isRom(contentBin)? getBanks(contentBin): 1)
       await draw()
     });
     sizeSelect.addEventListener('change', async () => {
-      [canvasOutput.width, canvasOutput.height] = sizeSelect.value.split('x').map((size) => parseInt(size))
+      await read()
+      ;[canvasOutput.width, canvasOutput.height] = sizeSelect.value.split('x').map((size) => parseInt(size))
       await draw()
     })
+    bank(1)
 });

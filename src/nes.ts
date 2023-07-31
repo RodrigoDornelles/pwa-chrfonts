@@ -90,7 +90,7 @@ export function chrFromRom(fileContent: string, bank: number): string
 
   const header = 16
   const chrTotal = 8192
-  const chrSkip = chrTotal * (bank - 1)
+  const chrSkip = chrTotal * bank
   const rom = 16384 * fileContent.charCodeAt(4)
   const traine = hasTraine(fileContent)? 512: 0
   const begin = header + traine + rom + chrSkip
