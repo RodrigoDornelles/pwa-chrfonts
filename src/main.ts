@@ -10,10 +10,18 @@ document.addEventListener('DOMContentLoaded', () => {
     let contentBin: string;
     let contentChr: string;
 
+    function clear() {
+      const ctx = canvasOutput.getContext('2d');
+      contentBin = ""
+      contentChr = ""
+      ctx?.clearRect(0, 0, canvasOutput.width, canvasOutput.height);
+    }
+
     function errorHandler(errorEvent: PromiseRejectionEvent | String | Event) {
       const reason = errorEvent instanceof PromiseRejectionEvent ? errorEvent.reason : errorEvent
       const message = reason instanceof Error? reason.message: reason
       alert(message)
+      clear()
     }
 
     function bank(b: number) {
