@@ -10,6 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let contentBin: string;
     let contentChr: string;
 
+    function errorHandler(errorEvent: PromiseRejectionEvent | String | Event) {
+      const reason = errorEvent instanceof PromiseRejectionEvent ? errorEvent.reason : errorEvent
+      const message = reason instanceof Error? reason.message: reason
+      alert(message)
+    }
+
     function bank(b: number) {
       const banksArr = Array.from({length: b}, (_, i) => i + 1).map(i => `bank ${i}`)
       Array.from(bankSelect.children).forEach(child => {
@@ -60,5 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ;[canvasOutput.width, canvasOutput.height] = sizeSelect.value.split('x').map((size) => parseInt(size))
       await draw()
     })
+
+    window.onerror = errorHandler
+    window.onunhandledrejection = errorHandler
     bank(1)
 });
