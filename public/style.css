@@ -41,7 +41,7 @@ canvas {
     image-rendering: crisp-edges;
 }
 
-input, select {
+input, select, button {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -49,6 +49,14 @@ input, select {
   background-color: #fff;
   outline: none;
   width: 90%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:active {
+    opacity: 0.6;
 }
 
 select {
