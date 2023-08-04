@@ -80,7 +80,7 @@ export function getBanks(fileContent: string): number
 {
   // https://www.nesdev.org/wiki/CHR_ROM_vs._CHR_RAM
   const banks = fileContent.charCodeAt(5)
-  if (banks == 0) {
+  if (isNaN(banks) || banks === 0) {
     throw new Error('CHR RAM is not supported.')
   }
   return banks
