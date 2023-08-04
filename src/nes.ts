@@ -78,7 +78,12 @@ export function isRom(fileContent: string): Boolean
 
 export function getBanks(fileContent: string): number
 {
-  return fileContent.charCodeAt(5)
+  // https://www.nesdev.org/wiki/CHR_ROM_vs._CHR_RAM
+  const banks = fileContent.charCodeAt(5)
+  if (banks == 0) {
+    throw new Error('CHR RAM is not supported.')
+  }
+  return banks
 }
 
 export function chrFromRom(fileContent: string, bank: number): string
