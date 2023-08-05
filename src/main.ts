@@ -1,5 +1,6 @@
 import { readFile } from './readFile'
 import { canvasFromChr, isRom, chrFromRom, getBanks } from './nes'
+import { canvasFromPrint } from './fonts'
 
 document.addEventListener('DOMContentLoaded', () => {
     const fileInput: HTMLInputElement = document.querySelector('#input-rom') as HTMLInputElement
@@ -7,6 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const paleteSelect: HTMLSelectElement = document.querySelector("#opt-pal-defaults") as HTMLSelectElement
     const sizeSelect: HTMLSelectElement = document.querySelector("#opt-grid-resolution") as HTMLSelectElement
     const bankSelect: HTMLSelectElement = document.querySelector("#opt-bank-chr") as HTMLSelectElement
+    const sizeX: HTMLSelectElement = document.querySelector("#opt-size-x") as HTMLSelectElement
+    const sizeY: HTMLSelectElement = document.querySelector("#opt-size-y") as HTMLSelectElement
+    const weightInput1: HTMLInputElement = document.querySelector('#opt-weight-number') as HTMLInputElement 
+    const weightInput2: HTMLInputElement = document.querySelector('#opt-weight-range') as HTMLInputElement 
     let contentBin: string;
     let contentChr: string;
 
@@ -24,6 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
       clear()
     }
 
+    function addSizes(select: HTMLSelectElement) {
+      Array.from({length: 29}, (_, px) => px + 4).forEach((px) => {
+        const el = document.createElement("option") as HTMLOptionElement
+        [el.value, el.text] = [`${px}`, `${px}px/${Math.ceil(px/8)}tiles`]
+        el.selected = px === 8
+        select.appendChild(el)
+      });
+    }
+    
     function bank(b: number) {
       const banksArr = Array.from({length: b}, (_, i) => i + 1).map(i => `bank ${i}`)
       Array.from(bankSelect.children).forEach(child => {
@@ -52,8 +66,23 @@ document.addEventListener('DOMContentLoaded', () => {
         canvasOutput.width,
         canvasOutput.height,
       )
+      const contentFnt = await canvasFromPrint(
+        canvasOutput.width,
+        canvasOutput.height,
+      )
       const canvasCtx = canvasOutput.getContext('2d')
       canvasCtx?.drawImage(contentImg, 0, 0)
+      canvasCtx?.drawImage(contentFnt, 0, 0)
+    }
+    function init() {
+      window.onerror = errorHandler
+      window.onunhandledrejection = errorHandler
+      weightInput1.value = "100"
+      weightInput2.value = "100"
+      addSizes(sizeX)
+      addSizes(sizeY)
+      clear()
+      bank(1)
     }
 
     paleteSelect.addEventListener('change', async () => {
@@ -74,8 +103,12 @@ document.addEventListener('DOMContentLoaded', () => {
       ;[canvasOutput.width, canvasOutput.height] = sizeSelect.value.split('x').map((size) => parseInt(size))
       await draw()
     })
+    weightInput1.addEventListener('input', () => {
+      weightInput2.value = weightInput1.value
+    })
+    weightInput2.addEventListener('change', () => {
+      weightInput1.value = weightInput2.value
+    })
 
-    window.onerror = errorHandler
-    window.onunhandledrejection = errorHandler
-    bank(1)
+    init()
 });

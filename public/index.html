@@ -9,14 +9,19 @@
         </main>
         <aside>
             <h1>CHR FONTS</h1>
+            <a href="https://github.com/sponsors/rodrigodornelles" target="_blank">
+                <image src="https://img.shields.io/github/sponsors/rodrigodornelles?color=ff69b4&logo=github"></image>
+            </a>&nbsp;
+            <a href="https://github.com/rodrigodornelles/pwa-chrfonts" target="_blank">
+                <image src="https://img.shields.io/github/v/release/rodrigodornelles/pwa-chrfonts?sort=semver&logo=github"></image>
+            </a>
             <hr/>
-            <label>Import Tileset or Rom</label>
-            <input type="file" id="input-rom" accept=".nes,.chr">
-            <label>Bank select</label>
-            <select id="opt-bank-chr">
-            </select>
-            <label>Color preview</label>
-            <select id="opt-pal-defaults">
+            <label for="input-rom">Import Tileset or Rom</label>
+            <input type="file" name="input-rom" id="input-rom" accept=".nes,.chr">
+            <label for="opt-bank-chr">Bank select</label>
+            <select id="opt-bank-chr" name="opt-bank-chr"></select>
+            <label for="opt-pal-defaults">Color preview</label>
+            <select id="opt-pal-defaults" name="opt-pal-defaults">
                 <option disabled>Select pre-made palette...</option>
                 <option value="0f30242c" selected>CGA Graphics</option>
                 <option value="0f302716">Kokobatoru 2</option>
@@ -24,15 +29,44 @@
                 <option value="22291a0f">Mario Bros (world)</option>
             </select>
             <br/>
-            <label>Grid preview</label>
-            <select id="opt-grid-resolution">
+            <label for="opt-grid-resolution">Grid preview</label>
+            <select id="opt-grid-resolution" name="opt-grid-resolution">
                 <option value="128x128" selected>128x128</option>
                 <option value="256x128">256x128</option>
                 <option value="128x256">128x256</option>
                 <option value="512x64">512x64</option>
             </select>
-            <button id="btn-export-chr">export chr</button>
-            <button id="btn-export-rom">export rom</button>
+            <h2>Editor</h2>
+            <div>
+                <div class="bi50">
+                    <label for="opt-size-x">max x</label>
+                    <select id="opt-size-x" name="opt-size-x"></select>
+                </div>
+                <div class="bi50">
+                    <label for="opt-size-y">max y</label>
+                    <select id="opt-size-y" name="opt-size-y"></select>
+                </div>
+            </div>
+            <label for="opt-weight-number">Weight</label>
+            <div>
+                <div class="bi75">
+                    <input type="range" id="opt-weight-range" name="opt-weight" min="1" max="255"> 
+                </div>
+                <div class="bi25">
+                    <input type="number" id="opt-weight-number" min="1" max="255">
+                </div>
+            </div>
+            <h2>Effects</h2>
+            ---
+            <h2>Download</h2>
+            <label for="opt-export-format">format type</label>
+            <select id="opt-export-format" name="opt-export-format">
+                <option value="chr" selected>export as CHR</option>
+                <option value="rom">export as ROM</option>
+                <option value="png">export as PNG</option>
+                <option value="bmp">export as BMP</option>
+            </select>
+            <button id="btn-export-button">save file</button>
         </aside>
     </body>
 </html>

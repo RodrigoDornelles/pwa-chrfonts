@@ -2,6 +2,16 @@
     margin: 0;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 body {
     padding: 0;
 }
@@ -25,7 +35,7 @@ main {
 }
   
 aside {
-    width: 250px;
+    width: 300px;
     background-color: #ddd;
     padding: 20px;
 }
@@ -62,6 +72,21 @@ button:active {
 select {
   background-size: 12px;
   padding-right: 30px;
+}
+
+.bi25 {
+    display: inline-block;
+    width: 24.9999999999%;
+}
+
+.bi50 {
+    display: inline-block;
+    width: 49.9999999999%;
+}
+
+.bi75 {
+    display: inline-block;
+    width: 74.9999999999%;
 }
 
 @media only screen and (max-width: 720px) {
