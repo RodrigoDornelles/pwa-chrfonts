@@ -1,6 +1,7 @@
 import { readFile } from './readFile'
 import { canvasFromChr, isRom, chrFromRom, getBanks } from './nes'
 import { canvasFromPrint } from './fonts'
+import { defaultTables } from './tables';
 
 document.addEventListener('DOMContentLoaded', () => {
     const fileInput: HTMLInputElement = document.querySelector('#input-rom') as HTMLInputElement
@@ -10,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const bankSelect: HTMLSelectElement = document.querySelector("#opt-bank-chr") as HTMLSelectElement
     const sizeX: HTMLSelectElement = document.querySelector("#opt-size-x") as HTMLSelectElement
     const sizeY: HTMLSelectElement = document.querySelector("#opt-size-y") as HTMLSelectElement
+    const encodeSelect: HTMLSelectElement = document.querySelector("#opt-encode-select") as HTMLSelectElement
     const weightInput1: HTMLInputElement = document.querySelector('#opt-weight-number') as HTMLInputElement 
     const weightInput2: HTMLInputElement = document.querySelector('#opt-weight-range') as HTMLInputElement 
     let contentBin: string;
@@ -71,7 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
         colors: [
           0x000000,
           0xFFFFFF
-        ]
+        ],
+        table: defaultTables[encodeSelect.value]
       }
       const contentImg = await canvasFromChr(
         contentChr,
