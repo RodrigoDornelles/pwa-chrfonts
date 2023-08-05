@@ -60,16 +60,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function draw() {
+      const fontConfig = {
+        width: canvasOutput.width,
+        height: canvasOutput.height,
+        font: {
+          width: parseInt(sizeX.value),
+          height: parseInt(sizeY.value),
+          weight: (256 - parseInt(weightInput1.value))
+        },
+        colors: [
+          0x000000,
+          0xFFFFFF
+        ]
+      }
       const contentImg = await canvasFromChr(
         contentChr,
         paleteSelect.value,
         canvasOutput.width,
         canvasOutput.height,
       )
-      const contentFnt = await canvasFromPrint(
-        canvasOutput.width,
-        canvasOutput.height,
-      )
+      const contentFnt = await canvasFromPrint(fontConfig)
       const canvasCtx = canvasOutput.getContext('2d')
       canvasCtx?.drawImage(contentImg, 0, 0)
       canvasCtx?.drawImage(contentFnt, 0, 0)
@@ -77,8 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function init() {
       window.onerror = errorHandler
       window.onunhandledrejection = errorHandler
-      weightInput1.value = "100"
-      weightInput2.value = "100"
+      weightInput1.value = "1"
+      weightInput2.value = "1"
       addSizes(sizeX)
       addSizes(sizeY)
       clear()
@@ -105,9 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     weightInput1.addEventListener('input', () => {
       weightInput2.value = weightInput1.value
+      draw()
     })
     weightInput2.addEventListener('change', () => {
       weightInput1.value = weightInput2.value
+      draw()
     })
 
     init()
