@@ -78,6 +78,10 @@ export function isRom(fileContent: string): Boolean
   return fileContent.slice(0, 4) == "NES\x1a"
 }
 
+export function getPages(fileContent: string): number {
+  return Math.ceil(fileContent.length/(8192/2))
+}
+
 export function getBanks(fileContent: string): number
 {
   // https://www.nesdev.org/wiki/CHR_ROM_vs._CHR_RAM
@@ -85,7 +89,7 @@ export function getBanks(fileContent: string): number
   if (isNaN(banks) || banks === 0) {
     throw new Error('CHR RAM is not supported.')
   }
-  return banks
+  return (banks * 2)
 }
 
 export function chrFromRom(fileContent: string, bank: number): string
@@ -96,11 +100,21 @@ export function chrFromRom(fileContent: string, bank: number): string
   }
 
   const header = 16
-  const chrTotal = 8192
+  const chrTotal = (8192/2)
   const chrSkip = chrTotal * bank
   const rom = 16384 * fileContent.charCodeAt(4)
   const traine = hasTraine(fileContent)? 512: 0
   const begin = header + traine + rom + chrSkip
+  const end = begin + chrTotal
+
+  return fileContent.slice(begin, end)
+}
+
+
+export function chrFromPageChr(fileContent: string, bank: number): string
+{
+  const chrTotal = (8192/2)
+  const begin = chrTotal * bank
   const end = begin + chrTotal
 
   return fileContent.slice(begin, end)

@@ -3,7 +3,7 @@ import { tablesInterface } from "./interfaces"
 export const defaultTables: tablesInterface = {
     none: {
     },
-    zero: {
+    mario: {
         0: '0',
         1: '1',
         2: '2',

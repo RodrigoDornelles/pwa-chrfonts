@@ -1,5 +1,5 @@
 import { readFile } from './readFile'
-import { canvasFromChr, isRom, chrFromRom, getBanks, getPalette } from './nes'
+import { canvasFromChr, isRom, chrFromRom, chrFromPageChr, getBanks, getPages, getPalette } from './nes'
 import { canvasFromPrint } from './fonts'
 import { defaultTables } from './tables';
 
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function bank(b: number) {
-      const banksArr = Array.from({length: b}, (_, i) => i + 1).map(i => `bank ${i}`)
+      const banksArr = Array.from({length: b}, (_, i) => i + 1).map(i => `bank ${Math.ceil(i/2)}/pattern   ${2-i%2}`)
       Array.from(bankSelect.children).forEach(child => {
         bankSelect.removeChild(child);
       })
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
       contentBin = await readFile(filelist[0])
       contentChr = isRom(contentBin)?
         chrFromRom(contentBin, parseInt(bankSelect.value)):
-        contentBin
+        chrFromPageChr(contentBin, parseInt(bankSelect.value))
     }
 
     async function draw() {
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     fileInput.addEventListener('change', async () => {
       await read()
-      bank(isRom(contentBin)? getBanks(contentBin): 1)
+      bank(isRom(contentBin)? getBanks(contentBin): getPages(contentBin))
       await draw()
     });
     sizeSelect.addEventListener('change', async () => {
