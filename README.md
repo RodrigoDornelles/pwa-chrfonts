@@ -10,7 +10,7 @@
 | Tutorial |
 | :------: |
 | **1-** choose the rom file<br>![ver02](https://raw.githubusercontent.com/RodrigoDornelles/RodrigoDornelles/master/media/pwa-chr-02-a-min.gif) |
-| **2-** choose the preview page and grid<br>![ver02](https://raw.githubusercontent.com/RodrigoDornelles/RodrigoDornelles/master/media/pwa-chr-02-b-min.gif) |
+| **2-** choose the preview page, color and grid<br>![ver02](https://raw.githubusercontent.com/RodrigoDornelles/RodrigoDornelles/master/media/pwa-chr-02-b-min.gif) |
 | **3-** configure the unicode<br>![ver02](https://raw.githubusercontent.com/RodrigoDornelles/RodrigoDornelles/master/media/pwa-chr-02-c-min.gif) |
 | **3-** configure the font<br>![ver02](https://raw.githubusercontent.com/RodrigoDornelles/RodrigoDornelles/master/media/pwa-chr-02-d-min.gif) |
 | **4-** customize the weight<br>![ver02](https://raw.githubusercontent.com/RodrigoDornelles/RodrigoDornelles/master/media/pwa-chr-02-e-min.gif) |
