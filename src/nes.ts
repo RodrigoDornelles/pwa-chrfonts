@@ -73,7 +73,7 @@ export async function canvasFromChr(fileContent: string, paletteText: string, wi
     return canvas
 }
 
-export function isRom(fileContent: string): Boolean
+export function isRom(fileContent: string): boolean
 {
   return fileContent.slice(0, 4) == "NES\x1a"
 }
@@ -95,7 +95,7 @@ export function getBanks(fileContent: string): number
 export function chrFromRom(fileContent: string, bank: number): string
 {
   // https://www.nesdev.org/wiki/INES
-  function hasTraine(fileContent: string): Boolean {
+  function hasTraine(fileContent: string): boolean {
     return !!(fileContent.charCodeAt(6) & 4)
   }
 

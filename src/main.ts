@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx?.clearRect(0, 0, canvasOutput.width, canvasOutput.height);
     }
 
-    function errorHandler(errorEvent: PromiseRejectionEvent | String | Event) {
+    function errorHandler(errorEvent: PromiseRejectionEvent | string | Event) {
       const reason = errorEvent instanceof PromiseRejectionEvent ? errorEvent.reason : errorEvent
       const message = reason instanceof Error? reason.message: reason
       alert(message)

@@ -1,1 +1,2 @@
-webpack.config.js linguist-generated
+*.js linguist-generated
+.*.js linguist-generated
