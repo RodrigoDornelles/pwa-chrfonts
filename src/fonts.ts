@@ -1,25 +1,50 @@
-import { fontInterface } from "./interfaces"
+import { printInterface, fontInterface } from "./interfaces"
 
-export async function canvasFromPrint(cfg: fontInterface): Promise<HTMLCanvasElement> {
+async function canvasFromFont(char: string, font: fontInterface): Promise<HTMLCanvasElement> {
+    const canvas: HTMLCanvasElement = document.createElement('canvas') as HTMLCanvasElement
+    const ctx: CanvasRenderingContext2D = canvas.getContext('2d', { willReadFrequently: true }) as CanvasRenderingContext2D  
+    canvas.width = font.width
+    canvas.height = font.height
+
+    ctx.font = "8px Arial";
+    ctx.fillStyle = `#${font.colors[1]}FF`
+    ctx?.fillText(char, 0, font.height)
+    const raw = ctx.getImageData(0, 0,  font.width, font.height)
+
+    for (let i = 0; i < raw.data.length; i += 4) {
+        const alpha = raw.data[i + 3]
+        if (alpha >= font.weight) {
+            const x = (i / 4) % font.width
+            const y = Math.floor(i / (4 * font.width))
+            ctx.fillRect(x, y, 1, 1)
+        }
+    }
+
+    ctx.fillStyle = `#${font.colors[0]}FF`
+    for (let i = 0; i < raw.data.length; i += 4) {
+        const alpha = raw.data[i + 3]
+        if (alpha <= font.weight) {
+            const x = (i / 4) % font.width
+            const y = Math.floor(i / (4 * font.width))
+            ctx.fillRect(x, y, 1, 1)
+        }
+    }
+
+    return canvas
+}
+
+export async function canvasFromPrint(cfg: printInterface): Promise<HTMLCanvasElement> {
     const canvas: HTMLCanvasElement = document.createElement('canvas') as HTMLCanvasElement
     const ctx: CanvasRenderingContext2D = canvas.getContext('2d') as CanvasRenderingContext2D  
     canvas.width = cfg.width
     canvas.height = cfg.height
 
-    ctx!.font = "8px Arial";
-    ctx!.fillStyle = "white";
-    ctx?.fillText("Hello World", 16, 32); 
-
-    for (let x = 0; x < 128; x++) {
-        for(let y = 0; y < 128; y++) {
-            const rgba = ctx.getImageData(x, y, 1, 1).data
-            if (rgba[3] > cfg.font.weight) {
-                ctx.fillRect(x, y, 1, 1)
-            } else if (rgba[3]) {
-                ctx.clearRect(x, y, 1, 1)
-            }
-        }
-    }
+    Object.entries(cfg.table).forEach(async ([unicode, char]) => {
+        const x = Math.floor((parseInt(unicode) * cfg.font.width) % cfg.width)
+        const y = Math.floor((parseInt(unicode) * cfg.font.width) / cfg.width)  * cfg.font.width
+        const put = await canvasFromFont(char as string, cfg.font)
+        ctx.drawImage(put, x, y)
+    });
 
     return canvas
 }

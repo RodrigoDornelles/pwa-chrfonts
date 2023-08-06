@@ -5,11 +5,13 @@ export interface tablesInterface {
 export interface fontInterface {
     width: number
     height: number
-    font: {
-        width: number
-        height: number
-        weight: number
-    }
-    colors: Array<Number>,
+    weight: number
+    colors: Array<string>
+}
+
+export interface printInterface {
+    width: number
+    height: number
+    font: fontInterface
     table: tablesInterface
 }

@@ -1,5 +1,5 @@
 import { readFile } from './readFile'
-import { canvasFromChr, isRom, chrFromRom, getBanks } from './nes'
+import { canvasFromChr, isRom, chrFromRom, getBanks, getPalette } from './nes'
 import { canvasFromPrint } from './fonts'
 import { defaultTables } from './tables';
 
@@ -65,16 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const fontConfig = {
         width: canvasOutput.width,
         height: canvasOutput.height,
+        table: defaultTables[encodeSelect.value],
         font: {
           width: parseInt(sizeX.value),
           height: parseInt(sizeY.value),
-          weight: (256 - parseInt(weightInput1.value))
-        },
-        colors: [
-          0x000000,
-          0xFFFFFF
-        ],
-        table: defaultTables[encodeSelect.value]
+          weight: (255 - parseInt(weightInput1.value)),
+          colors: getPalette(paleteSelect.value),
+        }
       }
       const contentImg = await canvasFromChr(
         contentChr,
@@ -90,8 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function init() {
       window.onerror = errorHandler
       window.onunhandledrejection = errorHandler
-      weightInput1.value = "1"
-      weightInput2.value = "1"
+      weightInput1.value = "150"
+      weightInput2.value = "150"
       addSizes(sizeX)
       addSizes(sizeY)
       clear()
@@ -114,6 +111,9 @@ document.addEventListener('DOMContentLoaded', () => {
     sizeSelect.addEventListener('change', async () => {
       await read()
       ;[canvasOutput.width, canvasOutput.height] = sizeSelect.value.split('x').map((size) => parseInt(size))
+      await draw()
+    })
+    encodeSelect.addEventListener('change', async () => {
       await draw()
     })
     weightInput1.addEventListener('input', () => {

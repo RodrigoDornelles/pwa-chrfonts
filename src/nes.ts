@@ -1,6 +1,11 @@
-export async function canvasFromChr(fileContent: string, paletteText: string, width: number, height: number): Promise<HTMLCanvasElement> {
-    // Define the constant palette with a magic number
-    const NES_PALLETE :string =
+export function getPalette(colors: Array<number> | string): Array<string>{
+  const colorsIndexes = Array.isArray(colors)? colors : Array.from({
+    length: Math.ceil(colors.length / 2)
+  },
+    (_, i) => parseInt(colors.slice(i * 2, i * 2 + 2), 16)
+  )
+
+  const NES_PALLETE :string =
         "808080" + "003DA6" + "0012B0" + "440096" + "A1005E" +
         "C70028" + "BA0600" + "8C1700" + "5C2F00" + "104500" +
         "054A00" + "00472E" + "004166" + "000000" + "050505" +
@@ -15,6 +20,13 @@ export async function canvasFromChr(fileContent: string, paletteText: string, wi
         "FFEFA6" + "FFF79C" + "D7E895" + "A6EDAF" + "A2F2DA" +
         "99FFFC" + "DDDDDD" + "111111" + "111111"
 
+  return colorsIndexes.map((color) => NES_PALLETE.slice((color * 6), (color * 6) + 6))
+}
+
+export async function canvasFromChr(fileContent: string, paletteText: string, width: number, height: number): Promise<HTMLCanvasElement> {
+    // Define the constant palette with a magic number
+    
+
     // Create an off-screen canvas
     const canvas: HTMLCanvasElement = document.createElement('canvas')
     const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d')
@@ -25,16 +37,7 @@ export async function canvasFromChr(fileContent: string, paletteText: string, wi
       throw new Error('Canvas context is not supported.')
     }
   
-    // Parse the palette data into an array of color values (e.g., 'rrggbb')
-    const colors: string[] = []
-    for (let i = 0; i < NES_PALLETE.length; i += 6) {
-      const colorValue: string = NES_PALLETE.slice(i, i + 6)
-      colors.push(colorValue)
-    }
-    const palette: number[] = []
-    for (let i = 0; i < paletteText.length; i += 2) {
-      palette.push(parseInt(paletteText.slice(i, i + 2), 16))
-    }
+    const palette = getPalette(paletteText)
   
     // Assuming each sprite is 8x8 pixels
     const spriteSize = 8
@@ -57,8 +60,7 @@ export async function canvasFromChr(fileContent: string, paletteText: string, wi
           const color2 = fileContent.slice(pixelIndex + 8, pixelIndex + 16)
 
           const pixelColor = ((color1.charCodeAt(pixelY) >> (7 - pixelX)) & 1) | (((color2.charCodeAt(pixelY) >> (7 - pixelX)) & 1) << 1)
-          const indexColor = palette[pixelColor]
-          const valueColor = colors[indexColor]
+          const valueColor = palette[pixelColor]
   
           // Draw the pixel on the canvas
           ctx.fillStyle = `#${valueColor}`
