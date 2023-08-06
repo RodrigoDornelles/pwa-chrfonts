@@ -1,23 +1,31 @@
-* {
+*, *::before, *::after {
+    box-sizing: border-box;
+    border: 0;
+    padding: 0;
     margin: 0;
 }
 
-body {
-    padding: 0;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
 
-hr {
-    width: 80%;
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 body {
-    width: 100vw;
-    min-height: 100vh;
-    display: flex;
+    font-family: "Roboto", Arial, sans-serif;   
     background-color: gray;
+    line-height: 1.6;
 }
 
 main {
+    min-height: 100vh;
+    display: flex;
+}
+
+section {
     width: 100%;
     max-height: 100vh;
     display: flex;
@@ -25,9 +33,9 @@ main {
 }
   
 aside {
-    width: 250px;
+    width: 300px;
     background-color: #ddd;
-    padding: 20px;
+    padding: 5px 20px;
 }
 
 canvas {
@@ -41,14 +49,27 @@ canvas {
     image-rendering: crisp-edges;
 }
 
-input, select {
+input, select, button {
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 16px;
   background-color: #fff;
   outline: none;
-  width: 90%;
+  width: 100%;
+}
+
+.slider {
+    height: 1em;
+    width: 90%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:active {
+    opacity: 0.6;
 }
 
 select {
@@ -56,8 +77,23 @@ select {
   padding-right: 30px;
 }
 
+.bi25 {
+    display: inline-block;
+    width: 24.9999999999%;
+}
+
+.bi50 {
+    display: inline-block;
+    width: 49.9999999999%;
+}
+
+.bi75 {
+    display: inline-block;
+    width: 74.9999999999%;
+}
+
 @media only screen and (max-width: 720px) {
-    body {
+    section, main {
         display: block;
     }
     aside {
