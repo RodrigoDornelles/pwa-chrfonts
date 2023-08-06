@@ -6,6 +6,7 @@ export interface fontInterface {
     width: number
     height: number
     weight: number
+    family: string
     colors: Array<string>
 }
 

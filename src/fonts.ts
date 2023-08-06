@@ -3,10 +3,11 @@ import { printInterface, fontInterface } from "./interfaces"
 async function canvasFromFont(char: string, font: fontInterface): Promise<HTMLCanvasElement> {
     const canvas: HTMLCanvasElement = document.createElement('canvas') as HTMLCanvasElement
     const ctx: CanvasRenderingContext2D = canvas.getContext('2d', { willReadFrequently: true }) as CanvasRenderingContext2D  
+    const size = font.height
     canvas.width = font.width
     canvas.height = font.height
 
-    ctx.font = "8px Arial";
+    ctx.font = `${size}px ${font.family}`;
     ctx.fillStyle = `#${font.colors[1]}FF`
     ctx?.fillText(char, 0, font.height)
     const raw = ctx.getImageData(0, 0,  font.width, font.height)
