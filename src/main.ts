@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function clear() {
       const ctx = canvasOutput.getContext('2d');
+      fileInput.value = ""
       contentBin = ""
       contentChr = ""
       ctx?.clearRect(0, 0, canvasOutput.width, canvasOutput.height);
