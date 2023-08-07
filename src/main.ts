@@ -6,18 +6,18 @@ import { defaultTables } from './tables';
 import { getSystemFonts, createName } from './util';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const deactivatableElements: NodeListOf<HTMLInputElement> = document.querySelectorAll('.disable')
-    const fileInput: HTMLInputElement = document.querySelector('#input-rom') as HTMLInputElement
-    const canvasOutput: HTMLCanvasElement = document.querySelector('#output-ppu') as HTMLCanvasElement
-    const paleteSelect: HTMLSelectElement = document.querySelector("#opt-pal-defaults") as HTMLSelectElement
-    const sizeSelect: HTMLSelectElement = document.querySelector("#opt-grid-resolution") as HTMLSelectElement
-    const bankSelect: HTMLSelectElement = document.querySelector("#opt-bank-chr") as HTMLSelectElement
-    const sizeX: HTMLSelectElement = document.querySelector("#opt-size-x") as HTMLSelectElement
-    const sizeY: HTMLSelectElement = document.querySelector("#opt-size-y") as HTMLSelectElement
-    const fontSelect: HTMLSelectElement = document.querySelector("#opt-font-select") as HTMLSelectElement
-    const encodeSelect: HTMLSelectElement = document.querySelector("#opt-encode-select") as HTMLSelectElement
-    const weightInput1: HTMLInputElement = document.querySelector('#opt-weight-number') as HTMLInputElement 
-    const weightInput2: HTMLInputElement = document.querySelector('#opt-weight-range') as HTMLInputElement 
+    const deactivatableElements = document.querySelectorAll('.disable') as NodeListOf<HTMLInputElement>
+    const fileInput = document.querySelector('#input-rom') as HTMLInputElement
+    const canvasOutput = document.querySelector('#output-ppu') as HTMLCanvasElement
+    const paleteSelect = document.querySelector("#opt-pal-defaults") as HTMLSelectElement
+    const sizeSelect = document.querySelector("#opt-grid-resolution") as HTMLSelectElement
+    const bankSelect = document.querySelector("#opt-bank-chr") as HTMLSelectElement
+    const sizeX = document.querySelector("#opt-size-x") as HTMLSelectElement
+    const sizeY = document.querySelector("#opt-size-y") as HTMLSelectElement
+    const fontSelect = document.querySelector("#opt-font-select") as HTMLSelectElement
+    const encodeSelect = document.querySelector("#opt-encode-select") as HTMLSelectElement
+    const weightInput1 = document.querySelector('#opt-weight-number') as HTMLInputElement 
+    const weightInput2 = document.querySelector('#opt-weight-range') as HTMLInputElement 
     const downloadSelect = document.querySelector("#opt-export-format") as HTMLSelectElement
     const downloadButton = document.querySelector('#btn-export-button') as HTMLButtonElement
     let contentBin: string;
