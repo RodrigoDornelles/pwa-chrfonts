@@ -1,6 +1,6 @@
 {
-    "name": "pwa-fehou",
-    "version": "0.2",
+    "name": "pwa-chrfonts",
+    "version": "0.3",
     "author": "RodrigoDornelles",
     "license": "AGPL-3.0-or-later",
     "homepage": "https://rodrigodornelles.github.io/pwa-fehou",
@@ -8,7 +8,10 @@
     "funding": "https://github.com/sponsors/RodrigoDornelles",
     "bugs": "https://github.com/RodrigoDornelles/pwa-fehou/issues",
     "keywords": [
-        "cartridge", "famicom", "nes", "rom"
+        "cartridge",
+        "famicom",
+        "nes",
+        "rom"
     ],
     "description": "an web app that's a font editor utility tool for homebrew games.",
     "scripts": {
@@ -18,12 +21,15 @@
         "build": "webpack"
     },
     "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^6.2.1",
-        "@typescript-eslint/parser": "^6.2.1",
+        "@typescript-eslint/eslint-plugin": "^6.3.0",
+        "@typescript-eslint/parser": "^6.3.0",
         "css-loader": "^6.8.1",
         "eslint": "^8.46.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-plugin-prettier": "^5.0.0",
         "html-loader": "^4.2.0",
         "html-webpack-plugin": "^5.5.3",
+        "prettier": "^3.0.1",
         "style-loader": "^3.3.3",
         "ts-loader": "^9.4.4",
         "typescript": "^5.1.6",
