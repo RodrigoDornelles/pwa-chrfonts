@@ -1,8 +1,7 @@
-import { tablesInterface } from "./interfaces"
+import { tablesInterface } from './interfaces'
 
 export const defaultTables: tablesInterface = {
-    none: {
-    },
+    none: {},
     mario: {
         0: '0',
         1: '1',
@@ -233,6 +232,6 @@ export const defaultTables: tablesInterface = {
         123: '{',
         124: '|',
         125: '}',
-        126: '~'
-    }
+        126: '~',
+    },
 }
