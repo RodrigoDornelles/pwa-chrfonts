@@ -15,3 +15,12 @@ export async function getSystemFonts(): Promise<string[]> {
 
     return Array.from(familyFonts)
 }
+
+export function createName(filename: string, suffix: string): string {
+    const chrFontSuffix = "-chrfont";
+    const lastDotIndex = filename.lastIndexOf('.');
+    const name = lastDotIndex !== -1 ? filename.slice(0, lastDotIndex) : filename;
+    const extension = lastDotIndex !== -1 ? filename.slice(lastDotIndex) : '';
+    const newName = `${name}${chrFontSuffix}${extension}${suffix}`;
+    return newName;
+}

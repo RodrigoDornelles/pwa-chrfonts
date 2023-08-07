@@ -1,8 +1,9 @@
 import { readFile } from './readFile'
+import { saveFile } from './saveFile';
 import { canvasFromChr, isRom, chrFromRom, chrFromPageChr, getBanks, getPages, getPalette } from './nes'
 import { canvasFromPrint } from './fonts'
 import { defaultTables } from './tables';
-import { getSystemFonts } from './util';
+import { getSystemFonts, createName } from './util';
 
 document.addEventListener('DOMContentLoaded', () => {
     const deactivatableElements: NodeListOf<HTMLInputElement> = document.querySelectorAll('.disable')
@@ -17,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const encodeSelect: HTMLSelectElement = document.querySelector("#opt-encode-select") as HTMLSelectElement
     const weightInput1: HTMLInputElement = document.querySelector('#opt-weight-number') as HTMLInputElement 
     const weightInput2: HTMLInputElement = document.querySelector('#opt-weight-range') as HTMLInputElement 
+    const downloadSelect = document.querySelector("#opt-export-format") as HTMLSelectElement
+    const downloadButton = document.querySelector('#btn-export-button') as HTMLButtonElement
     let contentBin: string;
     let contentChr: string;
 
@@ -151,6 +154,11 @@ document.addEventListener('DOMContentLoaded', () => {
     weightInput2.addEventListener('change', async () => {
       weightInput1.value = weightInput2.value
       await draw()
+    })
+    downloadButton.addEventListener('click', () => {
+      const filelist: FileList = fileInput.files as FileList
+      const extension = ['rom', 'chr'].includes(downloadSelect.value)? '': `.${downloadSelect.value}`
+      saveFile(extension? canvasOutput: contentBin, createName(filelist[0].name, extension))
     })
 
     init()
