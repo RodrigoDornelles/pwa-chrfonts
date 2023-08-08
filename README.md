@@ -3,7 +3,7 @@
 [![sponsors](https://img.shields.io/github/sponsors/rodrigodornelles?color=ff69b4&logo=github)](https://github.com/sponsors/RodrigoDornelles)
 [![Pages](https://github.com/RodrigoDornelles/pwa-fehou/actions/workflows/pages.yml/badge.svg)](https://github.com/RodrigoDornelles/pwa-fehou/actions/workflows/pages.yml)
 
-> **run at in your browser!** that's a editor utility to change your fonts sprites in tilesets and homebrews/rackrom games.
+> **run at in your browser!** thats a editor utility to change your fonts sprites in tilesets and homebrews/rackrom games.
 
 <div align="center">
 

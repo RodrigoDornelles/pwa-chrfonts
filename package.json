@@ -13,7 +13,7 @@
         "nes",
         "rom"
     ],
-    "description": "an web app that's a font editor utility tool for homebrew games.",
+    "description": "run in your browser! thats a editor utility to change your fonts sprites in tilesets and homebrews/rackrom games.",
     "scripts": {
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
