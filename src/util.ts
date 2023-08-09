@@ -25,3 +25,7 @@ export function createName(filename: string, suffix: string): string {
     const newName = `${name}${chrFontSuffix}${extension}${suffix}`
     return newName
 }
+ 
+export function hexVecToString(arr: Array<number>, base: number, pad: number): string {
+    return arr.reduce((acc, val) => acc + val.toString(base).padStart(pad, '0').toUpperCase(), '')
+}
