@@ -129,35 +129,30 @@ export function chrFromPageChr(fileContent: string, bank: number): string {
 /**
  * @li https://www.nesdev.org/wiki/PPU_pattern_tables
  */
-export function chrFromCanvas(
-    canvas: HTMLCanvasElement,
-    paletteText: string,
-    width: number,
-    height: number,
-): string {
+export function chrFromCanvas(canvas: HTMLCanvasElement, paletteText: string, width: number, height: number): string {
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
     const raw = ctx.getImageData(0, 0, width, height)
     const palette = getPalette(paletteText)
-    const buf = new Array(8192/2).fill(0)
+    const buf = new Array(8192 / 2).fill(0)
 
     for (let i = 0; i < raw.data.length; i += 4) {
-        const rgb = hexVecToString([raw.data[i], raw.data[i+1], raw.data[i+2]], 16, 2)
+        const rgb = hexVecToString([raw.data[i], raw.data[i + 1], raw.data[i + 2]], 16, 2)
         const pixelColor = palette.indexOf(rgb)
         const pixelX = (i / 4) % width
         const pixelY = Math.floor(i / (4 * width))
-        const reverseX = 7 - (pixelX%8)
-        const tileX = Math.floor(pixelX/8)
-        const tileY = Math.floor(pixelY/8)
+        const reverseX = 7 - (pixelX % 8)
+        const tileX = Math.floor(pixelX / 8)
+        const tileY = Math.floor(pixelY / 8)
         const partial = tileY * 16 + tileX
-        const color1 = (partial*16)+(pixelY%8)
-        const color2 = color1+8
-        
+        const color1 = partial * 16 + (pixelY % 8)
+        const color2 = color1 + 8
+
         if (pixelColor === -1) {
             throw new Error('unexpected color in canvas: ' + rgb)
-        }   
+        }
 
-        buf[color1] = buf[color1] | ((pixelColor&1?1:0) << reverseX)
-        buf[color2] = buf[color2] | ((pixelColor&2?1:0) << reverseX)
+        buf[color1] = buf[color1] | ((pixelColor & 1 ? 1 : 0) << reverseX)
+        buf[color2] = buf[color2] | ((pixelColor & 2 ? 1 : 0) << reverseX)
     }
 
     return String.fromCharCode.apply(null, buf)
