@@ -92,8 +92,10 @@ export function getPages(fileContent: string): number {
     return Math.ceil(fileContent.length / (8192 / 2))
 }
 
+/**
+ * @li https://www.nesdev.org/wiki/CHR_ROM_vs._CHR_RAM
+ */
 export function getBanks(fileContent: string): number {
-    // https://www.nesdev.org/wiki/CHR_ROM_vs._CHR_RAM
     const banks = fileContent.charCodeAt(5)
     if (isNaN(banks) || banks === 0) {
         throw new Error('CHR RAM is not supported.')
@@ -101,36 +103,41 @@ export function getBanks(fileContent: string): number {
     return banks * 2
 }
 
-export function chrFromRom(fileContent: string, bank: number): string {
-    // https://www.nesdev.org/wiki/INES
+/**
+ * @li https://www.nesdev.org/wiki/INES
+ */
+function getOffset(rom: boolean, fileContent: string, bank: number) {
     function hasTraine(fileContent: string): boolean {
         return !!(fileContent.charCodeAt(6) & 4)
     }
 
-    const header = 16
     const chrTotal = 8192 / 2
     const chrSkip = chrTotal * bank
-    const rom = 16384 * fileContent.charCodeAt(4)
-    const traine = hasTraine(fileContent) ? 512 : 0
-    const begin = header + traine + rom + chrSkip
-    const end = begin + chrTotal
+    const header = rom? 16: 0
+    const romSkip = rom? 16384 * fileContent.charCodeAt(4): 0
+    const traine = rom && hasTraine(fileContent) ? 512 : 0
+    const begin = header + traine + romSkip + chrSkip
 
-    return fileContent.slice(begin, end)
+    return begin
+}
+
+export function chrFromRom(fileContent: string, bank: number): string {
+    const offset = getOffset(true, fileContent, bank)
+    return fileContent.slice(offset, offset + 4096)
 }
 
 export function chrFromPageChr(fileContent: string, bank: number): string {
-    const chrTotal = 8192 / 2
-    const begin = chrTotal * bank
-    const end = begin + chrTotal
-
-    return fileContent.slice(begin, end)
+    const offset = getOffset(false, fileContent, bank)
+    return fileContent.slice(offset, offset + 4096)
 }
 
 /**
  * @li https://www.nesdev.org/wiki/PPU_pattern_tables
  */
-export function chrFromCanvas(canvas: HTMLCanvasElement, paletteText: string, width: number, height: number): string {
+export function chrFromCanvas(canvas: HTMLCanvasElement, paletteText: string): string {
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+    const width = canvas.width
+    const height = canvas.height
     const raw = ctx.getImageData(0, 0, width, height)
     const palette = getPalette(paletteText)
     const buf = new Array(8192 / 2).fill(0)
@@ -156,4 +163,9 @@ export function chrFromCanvas(canvas: HTMLCanvasElement, paletteText: string, wi
     }
 
     return String.fromCharCode.apply(null, buf)
+}
+
+export function mergeRomAndChr(original:string, bank:number, mod: string): string {
+    const offset = getOffset(isRom(original), original, bank)
+    return original.substring(0, offset) + mod + original.substring(offset + 4096, original.length)
 }

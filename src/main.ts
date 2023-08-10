@@ -1,6 +1,6 @@
 import { readFile } from './readFile'
 import { saveFile } from './saveFile'
-import { canvasFromChr, isRom, chrFromRom, chrFromPageChr, getBanks, getPages, getPalette } from './nes'
+import { canvasFromChr, isRom, chrFromRom, chrFromPageChr, getBanks, getPages, getPalette, chrFromCanvas, mergeRomAndChr } from './nes'
 import { canvasFromPrint } from './fonts'
 import { defaultTables } from './tables'
 import { getSystemFonts, createName } from './util'
@@ -126,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     fileInput.addEventListener('change', async () => {
         loadLocalFonts()
+        bank(1)
         await read()
         bank(isRom(contentBin) ? getBanks(contentBin) : getPages(contentBin))
         await draw()
@@ -153,9 +154,15 @@ document.addEventListener('DOMContentLoaded', () => {
         await draw()
     })
     downloadButton.addEventListener('click', () => {
+        const bank = parseInt(bankSelect.value)
         const filelist: FileList = fileInput.files as FileList
-        const extension = ['rom', 'chr'].includes(downloadSelect.value) ? '' : `.${downloadSelect.value}`
-        saveFile(extension ? canvasOutput : contentBin, createName(filelist[0].name, extension))
+        const extension = ['rom'].includes(downloadSelect.value) ? '' : `.${downloadSelect.value}`
+        const downloadFrom = ['chr'].includes(downloadSelect.value) && isRom(contentBin)? contentChr: contentBin
+        const downloadName = createName(filelist[0].name, extension)
+        const downloadContent = ['rom', 'chr'].includes(downloadSelect.value)  
+            ? mergeRomAndChr(downloadFrom, bank, chrFromCanvas(canvasOutput, paleteSelect.value))
+            : canvasOutput
+        saveFile(downloadContent, downloadName)
     })
 
     init()
