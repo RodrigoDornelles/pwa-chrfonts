@@ -36,6 +36,7 @@ aside {
     width: 300px;
     background-color: #ddd;
     padding: 5px 20px;
+    overflow: auto;
 }
 
 canvas {
@@ -92,11 +93,28 @@ select {
     width: 74.9999999999%;
 }
 
-@media only screen and (max-width: 720px) {
-    section, main {
+@media (max-aspect-ratio: 1/1) {
+    main {
         display: block;
     }
+    section {
+        height: 100vw;
+    }
     aside {
+        height: 100vw;
         width: 100%
+    }
+}
+
+@media print {
+    main, section, canvas {
+        display: block;
+        margin: 0 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+    }
+    aside {
+        display: none;
     }
 }
