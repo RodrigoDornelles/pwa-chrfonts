@@ -143,7 +143,7 @@ export function chrFromCanvas(canvas: HTMLCanvasElement, paletteText: string, wi
         const reverseX = 7 - (pixelX % 8)
         const tileX = Math.floor(pixelX / 8)
         const tileY = Math.floor(pixelY / 8)
-        const partial = tileY * 16 + tileX
+        const partial = tileY * (width/8) + tileX
         const color1 = partial * 16 + (pixelY % 8)
         const color2 = color1 + 8
 
