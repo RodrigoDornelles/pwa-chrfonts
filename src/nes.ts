@@ -113,8 +113,8 @@ function getOffset(rom: boolean, fileContent: string, bank: number) {
 
     const chrTotal = 8192 / 2
     const chrSkip = chrTotal * bank
-    const header = rom? 16: 0
-    const romSkip = rom? 16384 * fileContent.charCodeAt(4): 0
+    const header = rom ? 16 : 0
+    const romSkip = rom ? 16384 * fileContent.charCodeAt(4) : 0
     const traine = rom && hasTraine(fileContent) ? 512 : 0
     const begin = header + traine + romSkip + chrSkip
 
@@ -150,7 +150,7 @@ export function chrFromCanvas(canvas: HTMLCanvasElement, paletteText: string): s
         const reverseX = 7 - (pixelX % 8)
         const tileX = Math.floor(pixelX / 8)
         const tileY = Math.floor(pixelY / 8)
-        const partial = tileY * (width/8) + tileX
+        const partial = tileY * (width / 8) + tileX
         const color1 = partial * 16 + (pixelY % 8)
         const color2 = color1 + 8
 
@@ -165,7 +165,7 @@ export function chrFromCanvas(canvas: HTMLCanvasElement, paletteText: string): s
     return String.fromCharCode.apply(null, buf)
 }
 
-export function mergeRomAndChr(original:string, bank:number, mod: string): string {
+export function mergeRomAndChr(original: string, bank: number, mod: string): string {
     const offset = getOffset(isRom(original), original, bank)
     return original.substring(0, offset) + mod + original.substring(offset + 4096, original.length)
 }

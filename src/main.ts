@@ -1,6 +1,16 @@
 import { readFile } from './readFile'
 import { saveFile } from './saveFile'
-import { canvasFromChr, isRom, chrFromRom, chrFromPageChr, getBanks, getPages, getPalette, chrFromCanvas, mergeRomAndChr } from './nes'
+import {
+    canvasFromChr,
+    isRom,
+    chrFromRom,
+    chrFromPageChr,
+    getBanks,
+    getPages,
+    getPalette,
+    chrFromCanvas,
+    mergeRomAndChr,
+} from './nes'
 import { canvasFromPrint } from './fonts'
 import { defaultTables } from './tables'
 import { getSystemFonts, createName } from './util'
@@ -157,9 +167,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const bank = parseInt(bankSelect.value)
         const filelist: FileList = fileInput.files as FileList
         const extension = ['rom'].includes(downloadSelect.value) ? '' : `.${downloadSelect.value}`
-        const downloadFrom = ['chr'].includes(downloadSelect.value) && isRom(contentBin)? contentChr: contentBin
+        const downloadFrom = ['chr'].includes(downloadSelect.value) && isRom(contentBin) ? contentChr : contentBin
         const downloadName = createName(filelist[0].name, extension)
-        const downloadContent = ['rom', 'chr'].includes(downloadSelect.value)  
+        const downloadContent = ['rom', 'chr'].includes(downloadSelect.value)
             ? mergeRomAndChr(downloadFrom, bank, chrFromCanvas(canvasOutput, paleteSelect.value))
             : canvasOutput
         saveFile(downloadContent, downloadName)
