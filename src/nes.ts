@@ -132,6 +132,7 @@ export function chrFromPageChr(fileContent: string, bank: number): string {
 }
 
 /**
+ * @note the mask `0b010101` is a color correction for macos.
  * @li https://www.nesdev.org/wiki/PPU_pattern_tables
  */
 export function chrFromCanvas(canvas: HTMLCanvasElement, paletteText: string): string {
@@ -139,14 +140,13 @@ export function chrFromCanvas(canvas: HTMLCanvasElement, paletteText: string): s
     const width = canvas.width
     const height = canvas.height
     const raw = ctx.getImageData(0, 0, width, height)
-    const palette = getPalette(paletteText)
+    const palette = getPalette(paletteText).map((c) => parseInt(c, 16) | 0b010101)
     const buf = new Array(8192 / 2).fill(0)
 
     for (let i = 0; i < raw.data.length; i += 4) {
         const rgb = hexVecToString([raw.data[i], raw.data[i + 1], raw.data[i + 2]], 16, 2)
-        const pixelColor = palette.findIndex(
-            (color, index) => (parseInt(color, 16) | 0x010101) === (parseInt(palette[index], 16) | 0x010101),
-        )
+        const rgbColor = parseInt(rgb, 16) | 0b010101
+        const pixelColor = palette.indexOf(rgbColor)
         const pixelX = (i / 4) % width
         const pixelY = Math.floor(i / (4 * width))
         const reverseX = 7 - (pixelX % 8)
