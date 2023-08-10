@@ -105,3 +105,16 @@ select {
         width: 100%
     }
 }
+
+@media print {
+    main, section, canvas {
+        display: block;
+        margin: 0 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+    }
+    aside {
+        display: none;
+    }
+}

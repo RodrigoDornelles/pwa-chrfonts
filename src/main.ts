@@ -164,6 +164,10 @@ document.addEventListener('DOMContentLoaded', () => {
         await draw()
     })
     downloadButton.addEventListener('click', () => {
+        if (downloadSelect.value == 'pdf') {
+            return window.print()
+        }
+
         const bank = parseInt(bankSelect.value)
         const filelist: FileList = fileInput.files as FileList
         const extension = ['rom'].includes(downloadSelect.value) ? '' : `.${downloadSelect.value}`
@@ -172,6 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const downloadContent = ['rom', 'chr'].includes(downloadSelect.value)
             ? mergeRomAndChr(downloadFrom, bank, chrFromCanvas(canvasOutput, paleteSelect.value))
             : canvasOutput
+
         saveFile(downloadContent, downloadName)
     })
 
