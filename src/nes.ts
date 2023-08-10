@@ -144,7 +144,9 @@ export function chrFromCanvas(canvas: HTMLCanvasElement, paletteText: string): s
 
     for (let i = 0; i < raw.data.length; i += 4) {
         const rgb = hexVecToString([raw.data[i], raw.data[i + 1], raw.data[i + 2]], 16, 2)
-        const pixelColor = palette.indexOf(rgb)
+        const pixelColor = palette.findIndex(
+            (color, index) => (parseInt(color, 16) | 0x010101) === (parseInt(palette[index], 16) | 0x010101),
+        )
         const pixelX = (i / 4) % width
         const pixelY = Math.floor(i / (4 * width))
         const reverseX = 7 - (pixelX % 8)
