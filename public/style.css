@@ -36,6 +36,7 @@ aside {
     width: 300px;
     background-color: #ddd;
     padding: 5px 20px;
+    overflow: auto;
 }
 
 canvas {
@@ -93,10 +94,14 @@ select {
 }
 
 @media only screen and (max-width: 720px) {
-    section, main {
+    main {
         display: block;
     }
+    section {
+        height: 100vw;
+    }
     aside {
+        height: 100vw;
         width: 100%
     }
 }
