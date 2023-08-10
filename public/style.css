@@ -37,6 +37,7 @@ aside {
     background-color: #ddd;
     padding: 5px 20px;
     overflow: auto;
+    height: 100vh;
 }
 
 canvas {
@@ -98,10 +99,10 @@ select {
         display: block;
     }
     section {
-        height: 100vw;
+        height: 50vh;
     }
     aside {
-        height: 100vw;
+        height: 50vh;
         width: 100%
     }
 }
