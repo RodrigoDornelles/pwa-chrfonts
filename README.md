@@ -5,7 +5,15 @@
 
 > **run in your browser!** thats a editor utility to change your fonts sprites in tilesets and homebrews/rackrom games.
 
-## Features
+## :joystick: Platforms
+
+ * [X] [Nintendo Entertainment System](https://www.nesdev.org/wiki)
+ * [ ] Nintendo Gameboy
+ * [ ] Nintendo Gameboy Color
+ * [ ] Sega Mastersystem
+ * [ ] Sega Megadrive
+
+## :floppy_disk: Features
 
  * [X] Preview tileset online in your browser
  * [X] Support multiples chr banks
@@ -15,7 +23,7 @@
  * [ ] Insert new fonts from zip url _([fontmeme](https://fontmeme.com/), [dafont](dafont.com))_
  * [X] Export as pdf, tileset, image or rom.
 
-## Tutorial
+## :memo: Tutorial
 
 <div align="center">
 
@@ -27,20 +35,18 @@
 
 ### Edit
 
-| ![ver02](https://raw.githubusercontent.com/RodrigoDornelles/RodrigoDornelles/master/media/pwa-chr-02-c-min.gif) | ![ver02](https://raw.githubusercontent.com/RodrigoDornelles/RodrigoDornelles/master/media/pwa-chr-02-d-min.gif) | ![ver02](https://raw.githubusercontent.com/RodrigoDornelles/RodrigoDornelles/master/media/pwa-chr-02-e-min.gif) |
-| :-: | :-: | :-: |
-| **3-** configure the unicode | **3-** configure the font | **4-** customize the weight |
+| ![ver02](https://raw.githubusercontent.com/RodrigoDornelles/RodrigoDornelles/master/media/pwa-chr-02-c-min.gif) | ![ver02](https://raw.githubusercontent.com/RodrigoDornelles/RodrigoDornelles/master/media/pwa-chr-02-d-min.gif) | 
+| :-: | :-: |
+| **3-** configure the unicode | **4-** configure the font |
+
+| ![ver02](https://raw.githubusercontent.com/RodrigoDornelles/RodrigoDornelles/master/media/pwa-chr-02-e-min.gif) |
+| :-: |
+| **5-** customize the weight |
 
 ### Export
 
 | ![ver03](https://raw.githubusercontent.com/RodrigoDornelles/RodrigoDornelles/master/media/pwa-chr-03-a-min.gif) | ![ver03](https://raw.githubusercontent.com/RodrigoDornelles/RodrigoDornelles/master/media/pwa-chr-03-b-min.gif) |
 | :-: | :-: |
-| **5-** save modified game | **6-** test in emulator! |
+| **6-** save modified game | **7-** test in emulator! |
 
 </div>
-
-## Supported Plataform
-
- * [X] [Nintendo Entertainment System](https://www.nesdev.org/wiki)
- * [ ] Sega Master System
- * [ ] Sega Megadrive
