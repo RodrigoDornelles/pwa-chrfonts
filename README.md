@@ -50,3 +50,41 @@
 | **6-** save modified game | **7-** test in emulator! |
 
 </div>
+
+## :wrench: Contribute  ##
+
+This is a very simple project to improve it, you just need to know **typescript** and and it has __no dependencies__ for production, just use webpack as a bundler in development.
+
+### Install
+
+#### NodeJS
+
+```bash
+git clone https://github.com/RodrigoDornelles/pwa-chrfonts
+npm install
+```
+
+#### Docker
+
+```bash
+git clone https://github.com/RodrigoDornelles/pwa-chrfonts
+docker run --rm -v $(pwd):/app -w /app  -it node npm install
+```
+
+### Build
+
+#### NodeJS
+
+```bash
+npm run build
+```
+
+#### Docker
+
+```bash
+docker run --rm -v $(pwd):/app -w /app  -it node npm run build
+```
+
+------------------------------------------------------------------------------------------------------
+![logo](https://raw.githubusercontent.com/RodrigoDornelles/pwa-chrfonts/main/assets/chrfonts-24.png)
+This project is licensed under **GNU AGPL 3.0 or higher**, please read the [LICENSE](LICENSE) file.
