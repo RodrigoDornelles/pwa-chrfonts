@@ -94,5 +94,5 @@ docker run --rm -v $(pwd):/app -w /app  -it node npm run build
 ```
 
 ------------------------------------------------------------------------------------------------------
-![logo](https://raw.githubusercontent.com/RodrigoDornelles/pwa-chrfonts/main/assets/chrfonts-24.png)
+![logo](https://raw.githubusercontent.com/RodrigoDornelles/pwa-chrfonts/main/assets/icon-24.png)
 This project is licensed under **GNU AGPL 3.0 or higher**, please read the [LICENSE](LICENSE) file.
