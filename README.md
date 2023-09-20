@@ -1,7 +1,15 @@
-# PWA CHR FONTS
+<div align="center">
+
+# ![logo](https://raw.githubusercontent.com/RodrigoDornelles/pwa-chrfonts/main/assets/icon-192.png) <br/> PWA CHR FONTS EDITOR
 
 [![sponsors](https://img.shields.io/github/sponsors/rodrigodornelles?color=ff69b4&logo=github)](https://github.com/sponsors/RodrigoDornelles)
-[![Pages](https://github.com/RodrigoDornelles/pwa-fehou/actions/workflows/pages.yml/badge.svg)](https://github.com/RodrigoDornelles/pwa-fehou/actions/workflows/pages.yml)
+[![version](https://img.shields.io/github/v/release/rodrigodornelles/pwa-chrfonts?filter=*&logo=github)](https://github.com/RodrigoDornelles/pwa-chrfonts/releases)
+[![build](https://img.shields.io/github/actions/workflow/status/rodrigodornelles/pwa-chrfonts/pages.yml?label=deploy&logo=github)](https://github.com/RodrigoDornelles/pwa-chrfonts/actions/workflows/pages.yml)
+[![check](https://img.shields.io/github/actions/workflow/status/rodrigodornelles/pwa-chrfonts/check.yml?label=check&logo=github)](https://github.com/RodrigoDornelles/pwa-chrfonts/actions/workflows/check.yml)
+[![license](https://img.shields.io/github/license/rodrigodornelles/pwa-chrfonts?logo=gnu
+)](https://github.com/RodrigoDornelles/pwa-chrfonts/blob/develop/LICENSE)
+
+</div>
 
 > **run in your browser!** thats a editor utility to change your fonts sprites in tilesets and homebrews/rackrom games.
 
