@@ -1,16 +1,28 @@
 {
+    "id": "pwa-chrfonts",
     "name": "PWA CHR Fonts Editor",
     "short_name": "pwa-chrfonts",
     "description": "thats a editor utility to change your fonts sprites in tilesets and homebrews/rackrom games.",
     "start_url": "/",
+    "scope": "https://rodrigodornelles.github.io/pwa-chrfonts/",
     "display": "standalone",
-    "background_color": "gray",
-    "theme_color": "white",
-    "orientation": "portrait",
+    "dir": "ltr",
+    "lang": "en",
+    "background_color": "#808080",
+    "theme_color": "#808080",
+    "orientation": "any",
+    "categories": [
+      "utilities"
+    ],
     "icons": [
         {
             "src": "/icon-192x192.png",
             "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/icon-256.png",
+            "sizes": "256x256",
             "type": "image/png"
         },
         {
