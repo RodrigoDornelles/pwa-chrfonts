@@ -11,30 +11,23 @@
         "cartridge",
         "famicom",
         "nes",
-        "rom"
+        "rom",
+        "bum"
     ],
     "description": "run in your browser! thats a editor utility to change your fonts sprites in tilesets and homebrews/rackrom games.",
     "scripts": {
-        "lint": "eslint .",
-        "lint:fix": "eslint . --fix",
-        "start": "webpack --watch",
-        "build": "webpack"
-    },
+        "lint": "bunx eslint .",
+        "lint:fix": "bunx eslint . --fix",
+        "start": "bun run build --watch",
+        "build": "bun run build:before && bun build --minify --outdir dist --target browser --asset-naming '[name].[ext]' --entry-naming '[name].[ext]' src/main.ts public/*",
+        "build:before": "mkdir -p dist && cp assets/* dist && cp manifest.json dist"
+      },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^6.3.0",
-        "@typescript-eslint/parser": "^6.3.0",
-        "copy-webpack-plugin": "^11.0.0",
-        "css-loader": "^6.8.1",
         "eslint": "^8.46.0",
         "eslint-config-prettier": "^9.0.0",
         "eslint-plugin-prettier": "^5.0.0",
-        "html-loader": "^4.2.0",
-        "html-webpack-plugin": "^5.5.3",
         "prettier": "^3.0.1",
-        "style-loader": "^3.3.3",
-        "ts-loader": "^9.4.4",
-        "typescript": "^5.1.6",
-        "webpack": "^5.88.2",
-        "webpack-cli": "^5.1.4"
+        "bun": "^1.0.6"
     }
 }
