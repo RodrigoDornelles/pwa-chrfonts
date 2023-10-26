@@ -21,7 +21,7 @@
         "format": "bunx prettier --check --config .prettierrc src/*.ts",
         "format:fix": "bunx prettier --write --config .prettierrc src/*.ts", 
         "start": "bun run build --watch",
-        "build": "bun run build:before && bun build --minify --outdir dist --target browser --asset-naming '[name].[ext]' --entry-naming '[name].[ext]' src/worker.ts src/main.ts public/*",
+        "build": "bun run build:before && bun build --minify --outdir dist --target browser --asset-naming '[name].[ext]' --entry-naming '[name].[ext]' src/worker_service.ts src/main.ts public/*",
         "build:prod": "npm run build && bun bundle.ts",
         "build:before": "mkdir -p dist && cp assets/* dist && cp manifest.json dist"
     },

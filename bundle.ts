@@ -10,6 +10,7 @@ function replaceHtml(pattern: RegExp, content: string) {
 replaceHtml(/<link rel="stylesheet" href="style.css">/, '')
 replaceHtml(/<script src="main.js"><\/script>/, '')
 replaceHtml(/<\/body>/, `</body><script>${fs.readFileSync('./dist/main.js', 'utf-8')}</script>`)
+replaceHtml(/<\/body>/, `</body><script>${fs.readFileSync('./src/worker_install.ts', 'utf-8')}</script>`)
 replaceHtml(/<\/body>/, `</body><style>${fs.readFileSync('./dist/style.css', 'utf-8')}</style>`)
 
 toDelete.forEach((file: string) => {
