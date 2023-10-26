@@ -16,18 +16,33 @@
     ],
     "icons": [
         {
+            "src": "/pwa-chrfonts/icon-24.png",
+            "sizes": "24x24",
+            "purpose": "any maskable",
+            "type": "image/png"
+        },
+        {
+            "src": "/pwa-chrfonts/icon-144.png",
+            "sizes": "144x144",
+            "purpose": "any maskable",
+            "type": "image/png"
+        },
+        {
             "src": "/pwa-chrfonts/icon-192.png",
             "sizes": "192x192",
+            "purpose": "any maskable",
             "type": "image/png"
         },
         {
             "src": "/pwa-chrfonts/icon-256.png",
             "sizes": "256x256",
+            "purpose": "any maskable",
             "type": "image/png"
         },
         {
             "src": "/pwa-chrfonts/icon-512.png",
             "sizes": "512x512",
+            "purpose": "any maskable",
             "type": "image/png"
         }
     ]

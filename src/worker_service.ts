@@ -19,7 +19,7 @@ interface ExperimentalEvent extends Event {
 
 const CACHE_NAME = 'pwa-chrfonts'
 
-const urlsToCache = ['/', '/index.html', 'favicon.ico', 'main.js', 'style.js']
+const urlsToCache = ['/index.html', 'favicon.ico']
 
 self.addEventListener('install', (event: ExperimentalEvent) => {
     if (event.waitUntil) {

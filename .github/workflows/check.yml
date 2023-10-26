@@ -2,13 +2,13 @@ name: Check
 
 on:
   push:
-    branches:
+    branches: []
   pull_request:
-    branches:
+    branches: []
   workflow_dispatch:
 
 jobs:
-  eslint:
+  build:
     runs-on: ubuntu-latest
     steps:
       -
@@ -24,5 +24,43 @@ jobs:
         name: Install dependencies
         run: npm install
       -
-        name: Build project
+        name: Check
+        run: npm run build
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Restore node modules cache
+        uses: actions/cache@v3
+        with:
+          path: ./node_modules/
+          key: npm-${{ hashFiles('package.json') }}
+      -
+        name: Install dependencies
+        run: npm install
+      -
+        name: Check
         run: npm run lint
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Restore node modules cache
+        uses: actions/cache@v3
+        with:
+          path: ./node_modules/
+          key: npm-${{ hashFiles('package.json') }}
+      -
+        name: Install dependencies
+        run: npm install
+      -
+        name: Check
+        run: npm run format

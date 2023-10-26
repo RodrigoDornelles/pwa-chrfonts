@@ -1,7 +1,22 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>CHR FONTS</title>
+        <title>CHR Fonts Editor</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="title" content="CHR Fonts Editor" />
+        <meta name="description" content="run in your browser! thats a editor utility to change your fonts sprites in tilesets and homebrews/rackrom games. (nes, mastersystem, gameboy...)" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://rodrigodornelles.github.io/pwa-chrfonts" />
+        <meta property="og:title" content="CHR Fonts Editor" />
+        <meta property="og:description" content="run in your browser! thats a editor utility to change your fonts sprites in tilesets and homebrews/rackrom games. (nes, mastersystem, gameboy...)" />
+        <meta property="og:image" content="icon-512.png" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://rodrigodornelles.github.io/pwa-chrfonts" />
+        <meta property="twitter:title" content="CHR Fonts Editor" />
+        <meta property="twitter:description" content="run in your browser! thats a editor utility to change your fonts sprites in tilesets and homebrews/rackrom games. (nes, mastersystem, gameboy...)" />
+        <meta property="twitter:image" content="icon-512.png" />
+        <meta name="theme-color" content="#0000FF"/>
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
         <link rel="manifest" href="manifest.json">
         <link rel="stylesheet" href="style.css">
         <script src="main.js"></script>
@@ -56,6 +71,7 @@
                         <select id="opt-size-y" name="opt-size-y" disabled></select>
                     </div>
                 </div>
+                <label for="opt-weight-range" class="hidden">Weight</label>
                 <label for="opt-weight-number">Weight</label>
                 <div>
                     <div class="bi75">
@@ -80,17 +96,4 @@
             </aside>
         </main>
     </body>
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('worker.js')
-                    .then((registration) => {
-                        console.log('Service Worker registered with scope:', registration.scope)
-                    })
-                    .catch((error) => {
-                        console.warn('Service Worker registration failed:', error)
-                    })
-            })
-        }
-    </script>
 </html>
