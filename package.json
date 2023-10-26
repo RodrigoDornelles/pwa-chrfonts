@@ -16,17 +16,19 @@
     ],
     "description": "run in your browser! thats a editor utility to change your fonts sprites in tilesets and homebrews/rackrom games.",
     "scripts": {
-        "lint": "bunx eslint .",
-        "lint:fix": "bunx eslint . --fix",
+        "lint": "bun install --optional --silent && bunx eslint .",
+        "lint:fix": "bun install--optional --silent  && bunx eslint . --fix",
         "format": "bunx prettier --check --config .prettierrc src/*.ts",
         "format:fix": "bunx prettier --write --config .prettierrc src/*.ts", 
         "start": "bun run build --watch",
         "build": "bun run build:before && bun build --minify --outdir dist --target browser --asset-naming '[name].[ext]' --entry-naming '[name].[ext]' src/worker.ts src/main.ts public/*",
         "build:before": "mkdir -p dist && cp assets/* dist && cp manifest.json dist"
     },
-    "devDependencies": {
+    "optionalDependencies": {
         "@typescript-eslint/eslint-plugin": "^6.3.0",
-        "eslint": "^8.46.0",
+        "eslint": "^8.46.0"
+    },
+    "devDependencies": {
         "bun": "^1.0.6"
     }
 }
