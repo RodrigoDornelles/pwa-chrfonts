@@ -25,11 +25,12 @@
         "build:prod": "npm run build && bun bundle.ts",
         "build:before": "mkdir -p dist && cp assets/* dist && cp manifest.json dist"
     },
-    "optionalDependencies": {
-        "@typescript-eslint/eslint-plugin": "^6.3.0",
-        "eslint": "^8.46.0"
-    },
     "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^6.3.0",
+        "eslint": "^8.46.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-plugin-prettier": "^5.0.0",
+        "prettier": "^3.0.1",
         "bun": "^1.0.6"
     }
 }
