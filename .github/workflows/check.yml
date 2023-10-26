@@ -2,9 +2,9 @@ name: Check
 
 on:
   push:
-    branches:
+    branches: []
   pull_request:
-    branches:
+    branches: []
   workflow_dispatch:
 
 jobs:
@@ -46,7 +46,6 @@ jobs:
         name: Check
         run: npm run lint
 
-jobs:
   format:
     runs-on: ubuntu-latest
     steps:
