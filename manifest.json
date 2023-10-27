@@ -11,6 +11,9 @@
     "background_color": "#808080",
     "theme_color": "#808080",
     "orientation": "any",
+    "edge_side_panel": {
+        "preferred_width": 400
+    },
     "categories": [
       "utilities"
     ],
@@ -44,7 +47,7 @@
             "sizes": "512x512",
             "purpose": "any",
             "type": "image/png"
-        }
+        },
         {
             "src": "/pwa-chrfonts/icon-24.png",
             "sizes": "24x24",
