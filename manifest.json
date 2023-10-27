@@ -11,6 +11,9 @@
     "background_color": "#808080",
     "theme_color": "#808080",
     "orientation": "any",
+    "prefer_related_applications": false,
+    "related_applications": [
+    ],
     "edge_side_panel": {
         "preferred_width": 400
     },
