@@ -63,34 +63,34 @@
 
 This is a very simple project to improve it, you just need to know **typescript** and and it has __no dependencies__ for production, just use webpack as a bundler in development.
 
-### Install
+### clone the project 
 
-#### NodeJS
+```
+git clone https://github.com/RodrigoDornelles/pwa-chrfonts
+```
+
+### install and build
+
+#### bun ####
 
 ```bash
-git clone https://github.com/RodrigoDornelles/pwa-chrfonts
+bun run build
+```
+
+#### nodejs ####
+
+```bash
 npm install
-```
-
-#### Docker
-
-```bash
-git clone https://github.com/RodrigoDornelles/pwa-chrfonts
-docker run --rm -v $(pwd):/app -w /app  -it node npm install
-```
-
-### Build
-
-#### NodeJS
-
-```bash
 npm run build
 ```
 
-#### Docker
+#### container ####
 
 ```bash
-docker run --rm -v $(pwd):/app -w /app  -it node npm run build
+podman run --rm -v $(pwd):/app -w /app  -it oven/bun bun run build
+```
+```bash
+docker run --rm -v $(pwd):/app -w /app  -it ove/bun bun run build
 ```
 
 ------------------------------------------------------------------------------------------------------
